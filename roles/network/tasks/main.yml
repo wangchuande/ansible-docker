@@ -1,0 +1,9 @@
+---
+- name: add routes 192.168.200.154
+  lineinfile:
+    name: /etc/network/interfaces
+    line: 'up route add -net 192.168.0.0/16 gw 192.168.200.254'
+- name: restart networkong service
+  systemd:
+    name: networking
+    state: restarted

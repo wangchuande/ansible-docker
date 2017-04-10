@@ -1,0 +1,25 @@
+---
+- name: install nfs-common
+  apt:
+    name: nfs-common
+    state: present
+- name: create  /mnt/nas
+  file:
+    path: /mnt/nas
+    state: directory
+- name: create  /mnt/nas69
+  file:
+    path: /mnt/nas69
+    state: directory
+- name: add nfs 89 to /etc/fstab
+  lineinfile:
+    name: /etc/fstab
+    line: '192.168.200.89:/volume1/LINUXNFS    /mnt/nas   nfs  defaults,context="system_u:object_r:svirt_sandbox_file_t:s0"         0 0'
+- name: add nfs 69 to /etc/fstab
+  lineinfile:
+    name: /etc/fstab
+    line: '192.168.200.69:/volume1/imagestore      /mnt/nas69  nfs  defaults,context="system_u:object_r:svirt_sandbox_file_t:s0"         0 0'
+- name: mount all
+  command: mount -a
+  args:
+    warn: no

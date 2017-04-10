@@ -1,0 +1,11 @@
+---
+- hosts: all
+  gather_facts: False
+  roles:
+    - role: common
+
+- hosts: docker              # define 'docker' as our action target
+  become: yes
+  become_method: sudo
+  roles:
+    - role: docker     # define 'docker' role should be apply to hosts
